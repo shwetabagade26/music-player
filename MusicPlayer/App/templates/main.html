@@ -1,0 +1,79 @@
+{% load static %}
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Playlists</h2>
+
+    <form action="{% url 'App:playlist_create' %}" method="post" class="playlist-form">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="New playlist..." required>
+      <button type="submit"><i class="fa fa-plus"></i></button>
+    </form>
+
+    <ul class="playlist-list">
+      <li><a href="{% url 'App:index' %}" class="{% if not active_playlist %}active{% endif %}">All Songs</a></li>
+      {% for pl in playlists %}
+        <li><a href="{% url 'App:playlist_detail' pl.pk %}" class="{% if active_playlist.pk == pl.pk %}active{% endif %}">{{ pl.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <main class="player-card">
+    {% for item in page_obj %}
+
+      <div class="cover">
+        <img alt="" src="{{ item.image.url }}"/>
+      </div>
+
+      <div class="track-info">
+        <h1>{{ item.title }}</h1>
+        <h3>{{ item.artist }}</h3>
+      </div>
+
+      {% if playlists %}
+      <div class="add-to-playlist">
+        <select onchange="if(this.value) window.location.href=this.value">
+          <option value="">Add to playlist...</option>
+          {% for pl in playlists %}
+            <option value="{% url 'App:add_to_playlist' pl.pk item.id %}">{{ pl.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+
+      <div class="progress-section">
+        <div class="progress-bar js-progress-bar">
+          <div class="progress-fill js-progress-fill"></div>
+        </div>
+        <div class="time-row">
+          <span class="js-current-time">0:00</span>
+          <span class="js-duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% if active_playlist %}&pl={{ active_playlist.pk }}{% endif %}{% endif %}"
+           class="control-btn control-btn--skip {% if not page_obj.has_previous %}disabled{% endif %}">
+          <i class="fa fa-step-backward"></i>
+        </a>
+
+        <button type="button" class="control-btn control-btn--play js-play-btn">
+            <i class="fa fa-play js-play-icon"></i>
+        </button>
+
+        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% if active_playlist %}&pl={{ active_playlist.pk }}{% endif %}{% endif %}"
+           class="control-btn control-btn--skip {% if not page_obj.has_next %}disabled{% endif %}">
+          <i class="fa fa-step-forward"></i>
+        </a>
+      </div>
+
+      <audio class="js-media" preload="metadata">
+        <source src="{% if item.audio_file %}{{ item.audio_file.url }}{% else %}{{ item.audio_link }}{% endif %}"/>
+      </audio>
+
+    {% empty %}
+      <p class="empty-state">No songs here yet.</p>
+    {% endfor %}
+  </main>
+
+</div>
