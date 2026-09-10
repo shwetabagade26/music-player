@@ -4,6 +4,12 @@ on:
   push:
     branches: [ "main" ]
 
+# Declare dummy environment variables globally so python-decouple doesn't crash
+env:
+  SECRET_KEY: 'dummy-secret-key-for-github-actions'
+  DEBUG: 'True'
+  ALLOWED_HOSTS: 'localhost,127.0.0.1'
+
 jobs:
   test-and-validate:
     runs-on: ubuntu-latest
@@ -22,12 +28,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Django Tests & Check System
-        env:
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-        run: |
-          python manage.py test
+      - name: Run Django Tests
+        run: python MusicPlayer/manage.py test
 
       - name: Collect Static Files
-        run: |
-          python manage.py collectstatic --noinput
+        run: python MusicPlayer/manage.py collectstatic --noinput
