@@ -1,2 +1,2 @@
-web: gunicorn MusicPlayer.wsgi --log-file -
+web: gunicorn MusicPlayer.wsgi --log-file - --timeout 120
 release: python manage.py migrate --noinput

@@ -9,6 +9,9 @@ env:
   SECRET_KEY: 'dummy-secret-key-for-github-actions'
   DEBUG: 'True'
   ALLOWED_HOSTS: 'localhost,127.0.0.1'
+  CLOUDINARY_CLOUD_NAME: 'dummy'
+  CLOUDINARY_API_KEY: 'dummy'
+  CLOUDINARY_API_SECRET: 'dummy'
 
 jobs:
   test-and-validate:
