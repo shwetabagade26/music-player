@@ -1,10 +1,11 @@
 from django.db import models
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 
 class Song(models.Model):
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=200)
     image = models.ImageField(upload_to='covers/')
-    audio_file = models.FileField(upload_to='audio/', blank=True, null=True)
+    audio_file = models.FileField(upload_to='audio/', storage=VideoMediaCloudinaryStorage(), blank=True, null=True)    
     audio_link = models.CharField(max_length=200, blank=True, null=True)
     duration = models.CharField(max_length=20, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
