@@ -122,7 +122,7 @@
                 <button class="music-item" style="padding: 10px 15px; border-radius: 12px; display: flex; align-items: center; gap: 15px; width: 100%;">
                   
                   <div class="item-icon" style="background: transparent; border: 1px solid var(--surface-variant); width: 56px; height: 56px; flex-shrink: 0; overflow: hidden; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                    {% if pl.image and pl.image.url %}
+                    {% if pl.image %}
                       <img src="{{ pl.image.url }}" alt="{{ pl.name }}" style="width: 56px; height: 56px; min-width: 56px; min-height: 56px; object-fit: cover; border-radius: 8px;">
                     {% else %}
                       <span class="material-symbols-rounded" style="color: var(--on-surface-variant); font-size: 28px;">folder</span>
@@ -130,7 +130,7 @@
                   </div>
                   
                   <div class="music-content" style="text-align: left; flex: 1; overflow: hidden; display: flex; align-items: center; height: 56px;">
-                    <h3 class="headline-sm" style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; line-height: normal;">{{ pl.name }}</h3>
+                    <h3 class="headline-sm" style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; line-height: normal; color: #ffffff;">{{ pl.name }}</h3>
                   </div>
 
                 </button>
