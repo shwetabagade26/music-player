@@ -12,7 +12,6 @@ A full-featured, web-based music player application built with **Django**. This 
 
 - **🎧 Audio Management:** Seamlessly upload, store, and stream audio files utilizing Django's robust media handling capabilities.
 - **📂 Playlist Creation:** Organize your music library by building and managing custom playlists.
-- **🎤 Synced Lyrics (LRC-to-JSON):** Features a custom converter that processes LRC lyric files into JSON format, allowing lyrics to perfectly sync with the audio playback in real-time.
 - **🖼️ Album Art Support:** Integrated with `Pillow` for optimized image processing and cover art uploads.
 - **🚀 Production Ready:** Configured with WSGI settings and `Gunicorn` for smooth deployment and static file handling.
 
@@ -42,6 +41,7 @@ Make sure you have **Python 3.x** installed on your machine.
    git clone [https://github.com/shwetabagade26/music-player.git](https://github.com/shwetabagade26/music-player.git)
    cd music-player
 2. **Set up a virtual environment:**
+    ```bash
     python -m venv venv
 
     # On Windows
@@ -50,14 +50,19 @@ Make sure you have **Python 3.x** installed on your machine.
     # On macOS/Linux
     source venv/bin/activate
 3. **Install the dependencies:**
+    ```bash
     pip install -r requirements.txt
 4. **Apply database migrations:**
+    ```bash
     python manage.py makemigrations
     python manage.py migrate
 5. **Create a superuser (to access the admin panel for uploading songs):**
+    ```bash
     python manage.py createsuperuser
 6. **Run the development server:**
+    ```bash
     python manage.py runserver
 7. **Access the application:**
+    ```bash
     Open your browser and navigate to http://127.0.0.1:8000. Access the admin panel at http://127.0.0.1:8000/admin to start uploading your audio and LRC files.
 
